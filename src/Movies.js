@@ -12,15 +12,16 @@ const Movies = (props) => {
     } else if(error) {        
         return <Error/>
     } else {
-
-
-        return (
-            <ul className="movies">
-                {moviesData.map((item) => {
-                    return <Movie {...item} key={item.id}/>
-                })}
-            </ul>
-        )
+        if(moviesData?.length > 0) {
+            return (
+                <ul className="movies">
+                    {moviesData.map((item) => {
+                        return <Movie {...item} key={item.id}/>
+                    })}
+                </ul>
+            )
+        } 
+        return ""
     }
 }
 
