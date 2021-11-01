@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {UserContext} from "./Context"
 
-const Search = (props) => {
-    const {searchTerm, setSearchTerm} = props;
+const Search = () => {
+    const { searchTerm, setSearchTerm } = useContext(UserContext)
     
     return (
         <section className="search">

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Movie from './Movie'
 import Loading from "./Loading"
 import Error from "./Error"
+import {UserContext} from "./Context"
 
-
-const Movies = (props) => {
-    const {moviesData, error, loading} = props;
+const Movies = () => {
+    const { moviesData, error, loading } = useContext(UserContext)
 
     if(loading) {
         return <Loading/>

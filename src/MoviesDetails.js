@@ -19,8 +19,8 @@ const MoviesDetails = () => {
             status,
         } = movieDetails;
         
-        const genresArray = genres.map((genre) => genre.name).join(",")
-        const spokenLanguagesArray = spoken_languages.map((genre) => genre.english_name).join(",")
+        const genresArray = genres.map((genre) => genre.name).join(", ")
+        const spokenLanguagesArray = spoken_languages.map((genre) => genre.english_name).join(", ")
 
         const getTitle = _ => {
             if(title === original_title) {
@@ -56,7 +56,7 @@ const MoviesDetails = () => {
                         <div className="movie_details__extra-details">
                             <span>{runtime} minutes long </span>
                             <span> · </span>
-                            <span>{status ? release_date ? release_date.substr(0,4) : "NaN" : "Not released"}</span>
+                            <span>{status ? release_date ? `Release Date: ${release_date.substr(0,4)}` : "NaN" : "Not released"}</span>
                         </div>
 
                         <div className="languages-spoken">Languages spoken: {spokenLanguagesArray}</div>

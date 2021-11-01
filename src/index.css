@@ -229,6 +229,7 @@ a {
 .movie_details__details p {
   width:50ch;
   line-height: 1.6;
+  margin:0 auto;
 }
 
 .movie-details__img {

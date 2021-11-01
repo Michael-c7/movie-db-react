@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import {UserContext} from "./Context"
 
 import apiKey from "./apiKey"
 import Search from './Search'
@@ -11,11 +12,12 @@ import Error from './Error';
 
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("ip man")
-  const [moviesData, setMoviesData] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-
+  const {
+    searchTerm, setSearchTerm,
+    moviesData, setMoviesData,
+    loading, setLoading,
+    error, setError,
+   } = useContext(UserContext)
 
   let clientID = `?api_key=${apiKey}`
   let searchQuery = `&query=${searchTerm}`
@@ -55,8 +57,8 @@ function App() {
       <Router>
         <div className="container">
           <Route path="/" exact>
-            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-            {<Movies moviesData={moviesData} error={error} loading={loading}/>}
+            <Search/>
+            <Movies/>
           </Route>
 
           <Route path="/movie/:id" exact>

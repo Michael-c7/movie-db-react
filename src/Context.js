@@ -9,9 +9,12 @@ let searchMovieDetailsUrl = `https://api.themoviedb.org/3/movie/`
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const [test, setTest] = useState("test value")
     const [movieID, setMovieID] = useState(365222)
     const [movieDetails, setMovieDetails] = useState([])
+    const [searchTerm, setSearchTerm] = useState("ip man")
+    const [moviesData, setMoviesData] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const fetchMoviesDetails = async _ => {
         let url = "";
@@ -32,7 +35,12 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ test, setMovieID, movieDetails }}>
+        <UserContext.Provider value={{
+         setMovieID, movieDetails,
+         searchTerm, setSearchTerm,
+          moviesData, setMoviesData,
+          loading, setLoading,
+          error, setError, }}>
         {children}
         </UserContext.Provider>
     )
