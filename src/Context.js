@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
+
     const fetchMoviesDetails = async _ => {
         let url = "";
         url = `${searchMovieDetailsUrl}${movieID}${clientID}`

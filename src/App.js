@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import {UserContext} from "./Context"
+import { useFetch } from './useFetch';
 
 import apiKey from "./apiKey"
 import Search from './Search'
@@ -45,6 +46,7 @@ function App() {
   }
 
 
+  // useFetch("movies")
 
   useEffect(() => {
     fetchMovies()

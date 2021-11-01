@@ -5,7 +5,7 @@ import {UserContext} from "./Context"
 
 
 const MoviesDetails = () => {
-    const { movieDetails,movieID,setMovieID } = useContext(UserContext)
+    const { movieDetails, movieID, setMovieID } = useContext(UserContext)
         const {
             id,
             genres,

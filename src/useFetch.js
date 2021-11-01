@@ -2,20 +2,31 @@ import React, { useState, useEffect,useContext } from 'react';
 import {UserContext} from "./Context"
 import apiKey from "./apiKey"
 
-export const useFetch = () => {
+export const useFetch = requestType => {
     const { 
-        setMovieID,
         searchTerm,
         setLoading,
-        setError, } = useContext(UserContext)
+        setError,
+        setMovieDetails, 
+        movieID
+       } = useContext(UserContext)
 
     let clientID = `?api_key=${apiKey}`
     let searchQuery = `&query=${searchTerm}`
     let searchMovieUrl = "https://api.themoviedb.org/3/search/movie"
+    let searchMovieDetailsUrl = `https://api.themoviedb.org/3/movie/`
 
     const fetchMovies = async _ => {
         let url = "";
-        url = `${searchMovieUrl}${clientID}${searchQuery}`
+
+        if(requestType === "movies") {
+          url = `${searchMovieUrl}${clientID}${searchQuery}`
+        } else if(requestType === "movieDetails") {
+          url = `${searchMovieDetailsUrl}${movieID}${clientID}`
+        } else {
+          url = "";
+        }
+
         try {
           // IDK why this is working, but it will do for now
           if(!searchTerm) {
@@ -26,12 +37,23 @@ export const useFetch = () => {
           let data = await res.json()
           setLoading(false)
           searchTerm(false)
-          searchTerm(data.results)
+
+          if(requestType === "movies") {
+            searchTerm(data.results)
+          } else if(requestType === "movieDetails") {
+            setMovieDetails(data)
+          }
         } catch(error) {
           setError(true)
           console.log(error)
         }
       }
 
-    return "state value to use elsewhere"
+      // if(requestType === "movies") {
+      //   useEffect(() => {
+      //     // fetchMovies()
+      //   }, [searchTerm])
+      // }
+      
+    // return "state value to use elsewhere"
 }
