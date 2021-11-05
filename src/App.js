@@ -20,12 +20,12 @@ function App() {
     error, setError,
    } = useContext(UserContext)
 
-   const {fetchMovies} = useFetch()
+  //  const {fetchMovies} = useFetch()
 
   
-  useEffect(() => {
-    fetchMovies("movies")
-  }, [searchTerm])
+  // useEffect(() => {
+  //   fetchMovies("movies")
+  // }, [searchTerm])
 
 
 

@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
+import { useFetch } from './useFetch'
 import Movie from './Movie'
 import Loading from "./Loading"
 import Error from "./Error"
 import {UserContext} from "./Context"
 
 const Movies = () => {
-    const { moviesData, error, loading } = useContext(UserContext)
+    const {  error, loading } = useContext(UserContext)
+    // get data from useFetch here
+    const {data:moviesData} = useFetch()
 
     if(loading) {
         return <Loading/>

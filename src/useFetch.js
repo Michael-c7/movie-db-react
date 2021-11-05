@@ -3,6 +3,8 @@ import {UserContext} from "./Context"
 import apiKey from "./apiKey"
 
 export const useFetch = requestType => {
+    const [data, setData] = useState([])
+
     const { 
         searchTerm,
         setLoading,
@@ -36,12 +38,16 @@ export const useFetch = requestType => {
           let data = await res.json()
           setLoading(false)
           setError(false)
-          setMoviesData(data.results || data)
+          setData(data.results || data)
         } catch(error) {
           setError(true)
           console.log(error)
         }
       }
+
+      useEffect(() => {
+        fetchMovies("movies")
+      }, [searchTerm])
       
-    return {fetchMovies}
+    return {data}
 }
