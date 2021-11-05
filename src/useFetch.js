@@ -7,6 +7,7 @@ export const useFetch = requestType => {
         searchTerm,
         setLoading,
         setError,
+        setMoviesData,
         setMovieDetails, 
         movieID
        } = useContext(UserContext)
@@ -16,44 +17,31 @@ export const useFetch = requestType => {
     let searchMovieUrl = "https://api.themoviedb.org/3/search/movie"
     let searchMovieDetailsUrl = `https://api.themoviedb.org/3/movie/`
 
-    const fetchMovies = async _ => {
-        let url = "";
 
+      const fetchMovies = async requestType => {
+        let url = "";
+        
         if(requestType === "movies") {
           url = `${searchMovieUrl}${clientID}${searchQuery}`
         } else if(requestType === "movieDetails") {
           url = `${searchMovieDetailsUrl}${movieID}${clientID}`
         } else {
-          url = "";
+          url = ""
         }
 
+
         try {
-          // IDK why this is working, but it will do for now
-          if(!searchTerm) {
-            // searchTerm(_ => {})
-          }
-          searchTerm(true)
+          setLoading(true)
           let res = await fetch(`${url}`);
           let data = await res.json()
           setLoading(false)
-          searchTerm(false)
-
-          if(requestType === "movies") {
-            searchTerm(data.results)
-          } else if(requestType === "movieDetails") {
-            setMovieDetails(data)
-          }
+          setError(false)
+          setMoviesData(data.results || data)
         } catch(error) {
           setError(true)
           console.log(error)
         }
       }
-
-      // if(requestType === "movies") {
-      //   useEffect(() => {
-      //     // fetchMovies()
-      //   }, [searchTerm])
-      // }
       
-    // return "state value to use elsewhere"
+    return {fetchMovies}
 }
